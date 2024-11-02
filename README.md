@@ -65,6 +65,30 @@ This JavaScript script automatically clicks at the center of the screen on the [
        }
 
        // Set interval to repeat clicking every 100ms so 10 clicks per second
-       // If you set and lower of a number you get IP banned.
+       // If you set any lower of a number you get IP banned.
        const clickInterval = setInterval(clickCenterScreen, 100);
    }
+
+### Enter Click Count
+
+When you press **Enter** after pasting the code, a popup will appear in the center of the screen, prompting you to enter the number of clicks you want to perform.
+
+![Popup Example](https://github.com/MotoAcidic/kong-auto-clicker/blob/main/images/popup.PNG)
+
+Enter the desired number of clicks (up to 999) in the popup, then press **OK**. The script will begin clicking at the center of the screen at the specified interval and will stop automatically once it reaches the count.
+
+### Stopping the Auto-Click Script Early
+
+To stop the auto-clicking before reaching the specified count:
+
+Type `clearInterval(clickInterval);` into the console and press **Enter**. This will immediately stop the script.
+
+### Troubleshooting
+
+- **Wallet Not Connecting**: Ensure your wallet extension is installed and enabled. If you're still having issues, try refreshing the page and reconnecting.
+- **Invalid Number of Clicks**: If you enter an invalid number, the script will prompt an error in the console. Reload the page and try again.
+- **Script Not Stopping**: If `clearInterval(clickInterval);` does not stop the script, refresh the page to reset the JavaScript environment.
+
+---
+
+This script is a simple automation tool and should be used in accordance with [Apex Exchange](https://omni.apex.exchange/referral?code=XVVZLRH6)'s terms of service.
