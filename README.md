@@ -1,6 +1,6 @@
 # Apex Exchange Auto Click Script
 
-![Apex Exchange](./images/Apex.png)
+![Apex Exchange](https://github.com/MotoAcidic/kong-auto-clicker/blob/main/images/Apex.PNG)
 
 This JavaScript script automatically clicks at the center of the screen on the [Apex Exchange Kong page](https://omni.apex.exchange/referral?code=XVVZLRH6) to help users claim Solana airdrop tokens. You can specify the number of clicks you want, up to the daily limit of 999 clicks.
 
@@ -19,7 +19,7 @@ This JavaScript script automatically clicks at the center of the screen on the [
    - Authorize the connection within your wallet extension.
 3. **Verify Connection**: After connecting, ensure that your wallet address appears on the page. You are now ready to participate in the airdrop.
 
-![Kong Page](./images/kong.png)
+![Kong Page](https://github.com/MotoAcidic/kong-auto-clicker/blob/main/images/kong.PNG)
 
 ## Running the Auto-Click Script
 
