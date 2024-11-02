@@ -64,6 +64,7 @@ This JavaScript script automatically clicks at the center of the screen on the [
            }
        }
 
-       // Set interval to repeat clicking every second
-       const clickInterval = setInterval(clickCenterScreen, 1000);
+       // Set interval to repeat clicking every 100ms so 10 clicks per second
+       // If you set and lower of a number you get IP banned.
+       const clickInterval = setInterval(clickCenterScreen, 100);
    }
