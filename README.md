@@ -46,7 +46,7 @@ This extension automatically clicks at the center of the screen on the [Apex Exc
    - Authorize the connection within your wallet extension.
    - Ensure that your wallet address appears on the page, confirming the connection.
 
-   ![Kong Page](https://github.com/MotoAcidic/kong-auto-clicker/blob/main/images/kong.PNG)
+   ![Kong Page](https://github.com/MotoAcidic/kong-auto-clicker/blob/main/webPage/images/kong.PNG)
 
 3. **Open the Extension**:
    - Click the Apex Exchange Auto Clicker icon in your Chrome toolbar.
