@@ -1,6 +1,6 @@
 # Apex Exchange Auto Click Script
 
-![Apex Exchange](https://github.com/MotoAcidic/kong-auto-clicker/blob/main/images/Apex.PNG)
+![Apex Exchange](https://github.com/MotoAcidic/kong-auto-clicker/blob/main/webPage/images/Apex.PNG)
 
 This extension automatically clicks at the center of the screen on the [Apex Exchange Kong page](https://omni.apex.exchange/referral?code=XVVZLRH6) to help users claim Solana airdrop tokens. You can specify the number of clicks you want, without any cap.
 
