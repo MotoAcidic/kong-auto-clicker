@@ -1,0 +1,22 @@
+{
+    "manifest_version": 3,
+    "name": "Apex Auto Clicker",
+    "version": "1.0",
+    "description": "Automatically clicks on the Apex Kong page at specified intervals.",
+    "permissions": ["activeTab", "scripting", "storage"],
+    "host_permissions": ["https://www.apex.exchange/kong"],
+    "action": {
+        "default_popup": "popup.html",
+        "default_icon": {
+            "16": "icon.png",
+            "48": "icon.png",
+            "128": "icon.png"
+        }
+    },
+    "content_scripts": [
+        {
+            "matches": ["https://www.apex.exchange/kong"],
+            "js": ["content.js"]
+        }
+    ]
+}

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apex Auto Clicker</title>
+    <style>
+        /* Basic styling */
+        #container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        iframe {
+            width: 100%;
+            height: 80vh;
+            border: 1px solid #ccc;
+            margin-top: 20px;
+        }
+        #startButton, #stopButton {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        #startButton {
+            background-color: #4CAF50;
+            color: white;
+        }
+        #stopButton {
+            background-color: #ff4d4d;
+            color: white;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div id="container">
+    <button id="startButton">Start Auto Clicker</button>
+    <button id="stopButton">Stop Clicker</button>
+
+    <!-- Iframe to load the Apex Kong page -->
+    <iframe id="kongFrame" src="https://www.apex.exchange/kong"></iframe>
+</div>
+
+<script>
+    let clickInterval;
+    let clickCount = 0;
+    let totalClicks = 0;
+
+    // Function to click at the center of the iframe
+    function clickCenterScreen() {
+        const iframe = document.getElementById("kongFrame").contentWindow;
+        const centerX = iframe.innerWidth / 2;
+        const centerY = iframe.innerHeight / 2;
+        const clickEvent = new MouseEvent("click", {
+            bubbles: true,
+            cancelable: true,
+            clientX: centerX,
+            clientY: centerY
+        });
+        iframe.document.elementFromPoint(centerX, centerY).dispatchEvent(clickEvent);
+        console.log(`Clicked at center (${centerX}, ${centerY}) - Click #${clickCount + 1}`);
+        clickCount += 1;
+        if (clickCount >= totalClicks) {
+            stopClicker();
+        }
+    }
+
+    // Function to start the auto-clicker
+    function startClicker() {
+        clickCount = 0;
+        totalClicks = parseInt(prompt("Enter the number of clicks:"), 10);
+        if (isNaN(totalClicks) || totalClicks <= 0) {
+            alert("Please enter a valid positive number of clicks.");
+            return;
+        }
+
+        // Start clicking interval and show the stop button
+        clickInterval = setInterval(clickCenterScreen, 100);
+        document.getElementById("startButton").style.display = "none";
+        document.getElementById("stopButton").style.display = "block";
+    }
+
+    // Function to stop the auto-clicker
+    function stopClicker() {
+        clearInterval(clickInterval);
+        document.getElementById("stopButton").style.display = "none";
+        document.getElementById("startButton").style.display = "block";
+        console.log("Auto-clicking stopped.");
+    }
+
+    // Event listeners for start and stop buttons
+    document.getElementById("startButton").addEventListener("click", startClicker);
+    document.getElementById("stopButton").addEventListener("click", stopClicker);
+</script>
+
+</body>
+</html>

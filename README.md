@@ -2,7 +2,13 @@
 
 ![Apex Exchange](https://github.com/MotoAcidic/kong-auto-clicker/blob/main/images/Apex.PNG)
 
-This JavaScript script automatically clicks at the center of the screen on the [Apex Exchange Kong page](https://omni.apex.exchange/referral?code=XVVZLRH6) to help users claim Solana airdrop tokens. You can specify the number of clicks you want, without any cap.
+This extension automatically clicks at the center of the screen on the [Apex Exchange Kong page](https://omni.apex.exchange/referral?code=XVVZLRH6) to help users claim Solana airdrop tokens. You can specify the number of clicks you want, without any cap.
+
+## About the Folders
+
+- **Extension Folder**: Contains the necessary files to use this as a Chrome extension, allowing you to auto-click without entering code manually.
+- **WebPage Folder**: Contains files to host the auto-clicker on your own site within an iframe.
+- **Console Folder**: Contains a script you can copy and paste directly into the Chrome Developer Console if you prefer not to use the extension.
 
 ## Prerequisites
 
@@ -10,124 +16,61 @@ This JavaScript script automatically clicks at the center of the screen on the [
 - **Wallet Extension**: Install a compatible Solana wallet browser extension (e.g., Phantom or Sollet).
 - **Apex Exchange Account**: Make sure you're registered on [Apex Exchange](https://omni.apex.exchange/referral?code=XVVZLRH6).
 
-## Connecting Your Wallet
+## Installation for Chrome Extension
 
-1. **Visit the Apex Kong Page**: Open [https://www.apex.exchange/kong](https://omni.apex.exchange/referral?code=XVVZLRH6) in your browser.
-2. **Connect Wallet**:
+1. **Download the Extension Folder**:
+   - Clone or download this repository to your local machine.
+   - Make sure you have the complete **Extension** folder, with files such as `manifest.json`, `popup.html`, `popup.js`, `content.js`, `popup.css`, and any required images.
+
+2. **Open Chrome Extensions**:
+   - In your Chrome browser, go to `chrome://extensions/`.
+
+3. **Enable Developer Mode**:
+   - Toggle the **Developer mode** switch in the top right corner.
+
+4. **Upload the Extension Folder**:
+   - Click **Load unpacked** and select the **Extension** folder from this repository.
+   - The extension should now load and appear in your Chrome extensions list. If there’s an error, check that the `manifest.json` and required files are present.
+
+5. **Confirm Installation**:
+   - The Apex Exchange Auto Clicker extension should now appear in your Chrome toolbar.
+
+## Using the Extension
+
+1. **Navigate to the Apex Kong Page**:
+   - Go to the [Apex Exchange Kong page](https://www.apex.exchange/kong) in your browser.
+
+2. **Connect Your Wallet**:
    - Locate and click the "Connect Wallet" button on the page.
    - Select your wallet from the list (e.g., Phantom).
    - Authorize the connection within your wallet extension.
-3. **Verify Connection**: After connecting, ensure that your wallet address appears on the page. You are now ready to participate in the airdrop.
+   - Ensure that your wallet address appears on the page, confirming the connection.
 
-![Kong Page](https://github.com/MotoAcidic/kong-auto-clicker/blob/main/images/kong.PNG)
+   ![Kong Page](https://github.com/MotoAcidic/kong-auto-clicker/blob/main/images/kong.PNG)
 
-## Running the Auto-Click Script
+3. **Open the Extension**:
+   - Click the Apex Exchange Auto Clicker icon in your Chrome toolbar.
 
-1. **Open Developer Console**:
-   - Right-click anywhere on the webpage.
-   - Select **Inspect** (or **Inspect Element**).
-   - Go to the **Console** tab in the Developer Tools panel.
+4. **Set Click Parameters**:
+   - **Number of Clicks**: Enter the total number of clicks you want the extension to perform.
+   - **Click Interval (ms)**: Enter the time interval (in milliseconds) between each click.
+   - **Warning**: Setting an interval below 100ms may lead to a temporary ban on Apex Exchange. You’ll receive a popup warning to help prevent bans.
 
-2. **Copy and Paste the Script**: Copy the following code and paste it into the Console:
+5. **Start the Auto Clicker**:
+   - Click the **Start Auto Clicker** button. The extension will start clicking at the center of the screen at your specified interval.
+   - To stop the auto-clicker, simply click the **Stop Clicker** button in the extension popup.
 
-   ```javascript
-   // Prompt the user to enter the number of clicks
-   const totalClicks = parseInt(prompt("Enter the number of clicks:"), 10);
+### Additional Hosting Options
 
-   if (isNaN(totalClicks) || totalClicks <= 0) {
-       console.error("Invalid number of clicks. Please enter a positive number.");
-   } else {
-       let clickCount = 0;
-
-       // Function to click at the center of the screen
-       function clickCenterScreen() {
-           // Calculate the center coordinates of the screen
-           const centerX = window.innerWidth / 2;
-           const centerY = window.innerHeight / 2;
-
-           // Create a new mouse event
-           const clickEvent = new MouseEvent("click", {
-               bubbles: true,
-               cancelable: true,
-               clientX: centerX,
-               clientY: centerY
-           });
-
-           // Dispatch the event at the center of the screen
-           document.elementFromPoint(centerX, centerY).dispatchEvent(clickEvent);
-           console.log(`Clicked at center (${centerX}, ${centerY}) - Click #${clickCount + 1}`);
-
-           clickCount += 1;
-           if (clickCount >= totalClicks) {
-               clearInterval(clickInterval); // Stop clicking when reaching the specified number
-               console.log("Auto-clicking stopped after reaching the specified count.");
-               removeStopButton();
-           }
-       }
-
-       // Set interval to repeat clicking every 100ms, so 10 clicks per second
-       const clickInterval = setInterval(clickCenterScreen, 100);
-
-       // Function to create the "Stop Clicker" button
-       function createStopButton() {
-           const stopButton = document.createElement("button");
-           stopButton.innerText = "Stop Clicker";
-           stopButton.style.position = "fixed";
-           stopButton.style.top = "20px";
-           stopButton.style.right = "20px";
-           stopButton.style.padding = "10px 20px";
-           stopButton.style.fontSize = "16px";
-           stopButton.style.zIndex = "1000";
-           stopButton.style.backgroundColor = "#ff4d4d";
-           stopButton.style.color = "white";
-           stopButton.style.border = "none";
-           stopButton.style.borderRadius = "5px";
-           stopButton.style.cursor = "pointer";
-
-           // Add an event listener to stop the clicker when clicked
-           stopButton.addEventListener("click", () => {
-               clearInterval(clickInterval);
-               console.log("Auto-clicking stopped manually.");
-               removeStopButton();
-           });
-
-           document.body.appendChild(stopButton);
-       }
-
-       // Function to remove the "Stop Clicker" button
-       function removeStopButton() {
-           const stopButton = document.querySelector("button");
-           if (stopButton) {
-               stopButton.remove();
-           }
-       }
-
-       // Create the "Stop Clicker" button when the script starts
-       createStopButton();
-   }
-3. **Enter Click Count**
-
-When you press **Enter** after pasting the code, a popup will appear in the center of the screen, prompting you to enter the number of clicks you want to perform.
-
-![Popup Example](https://github.com/MotoAcidic/kong-auto-clicker/blob/main/images/popup.PNG)
-
-Enter the desired number of clicks in the popup, then press **OK**. The script will begin clicking at the center of the screen at the specified interval and will stop automatically once it reaches the count.
-
-### Stopping the Auto-Click Script Early
-
-In addition to stopping automatically, you can also manually stop the script at any time by using the **Stop Clicker** button.
-
-![Stop Clicker Example](https://github.com/MotoAcidic/kong-auto-clicker/blob/main/images/StopClicker.PNG)
-
-The "Stop Clicker" button will appear in the top-right corner of the screen when the script is running. Simply click this button to immediately stop the auto-clicking process. The button will disappear automatically when the clicking stops.
+- **WebPage Folder**: This folder contains files you can use to host the auto-clicker on your own site. The webpage will load Apex Exchange in an iframe and can initiate clicks from within your custom site setup.
+- **Console Folder**: If you prefer to manually execute the clicker in the browser console, this folder contains a script for copy-pasting into Chrome Developer Console.
 
 ### Troubleshooting
 
 - **Wallet Not Connecting**: Ensure your wallet extension is installed and enabled. If you're still having issues, try refreshing the page and reconnecting.
-- **Invalid Number of Clicks**: If you enter an invalid number, the script will prompt an error in the console. Reload the page and try again.
-- **Script Not Stopping**: If the **Stop Clicker** button does not work, or if you can't see it, type `clearInterval(clickInterval);` into the console and press **Enter** to stop the script manually.
+- **Invalid Number of Clicks**: If you enter an invalid number, the extension will prompt an error. Adjust the value and try again.
+- **Script Not Stopping**: If the **Stop Clicker** button does not work, refresh the page to reset the JavaScript environment.
 
 ---
 
-This script is a simple automation tool and should be used in accordance with [Apex Exchange](https://omni.apex.exchange/referral?code=XVVZLRH6)'s terms of service.
-
+This tool should be used responsibly and in accordance with [Apex Exchange](https://omni.apex.exchange/referral?code=XVVZLRH6)'s terms of service.
